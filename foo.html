@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>jQuery UI Example Page</title>
+    <script type="text/javascript" src="jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="button-disabler.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //$('.disable-double-submit').button();
+        });
+    </script>
+    <style type="text/css">
+        body {
+            font: 62.5% Cambria, Georgia, serif;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body class="ui-form">
+
+<div>
+    <div id="div" data-disable-with="Xxx...">DIV Button</div>
+
+    <div id="divButton" class="disable-double-submit" data-disable-with="Blocking...">DIV Button</div>
+    <div id="divButton2" class="disable-double-submit">DIV Button2</div>
+
+    <a id="linkButton" class="disable-double-submit" href="http://blog.ik.am/category/Book/">A Button</a>
+    <a id="linkButton2" class="disable-double-submit" href="http://blog.ik.am/category/Programming/?aa"
+       data-disable-with="Blocking">A Button2</a>
+
+    <button class="disable-double-submit" data-disable-with="Blocking...">Button</button>
+    <button class="disable-double-submit">Button2</button>
+
+    <input type="button" id="inputButton" class="disable-double-submit" data-disable-with="Blocking..."
+           value="Input Button"/>
+    <input type="button" id="inputButton2" class="disable-double-submit" value="Input Button2"/>
+
+    <input type="submit" id="submitButton" class="disable-double-submit" name="foo" data-disable-with="Blocking..."
+           value="Submit Button"/>
+    <input type="submit" id="submitButton2" class="disable-double-submit" name="foo" value="Submit Button2"/>
+</div>
+
+<h2 class="demoHeaders">Common Input Fields</h2>
+
+<form onsubmit="return true;" action="http://blog.ik.am/category/Book/">
+    <p>
+        <strong>Input (type: 'text')</strong><br/>
+        <input type="text"/>
+    </p>
+
+    <p>
+        <strong>Input (type: 'email' and 'password')</strong><br/>
+        <input type="email"/><input type="password"/>
+    </p>
+
+    <p>
+        <strong>Text Area</strong><br/>
+        <textarea cols="30"></textarea>
+    </p>
+
+    <p>
+        <strong>Other Inputs Remain Fine</strong><br/>
+        <input type="radio"/> <br/>
+        <input type="checkbox"/> <br/>
+        <input type="range"/> <br/>
+        <input type="file"/> <br/>
+        <input type="submit" name="go" value="Submit" data-disable-with="Sending..." class="disable-double-submit"/>
+        <br/>
+        <input type="button" value="Click" data-disable-with="Testing..." class="disable-double-submit"/> <br/>
+    </p>
+
+    <a id="g" href="http://google.com">google</a>
+</form>
+</body>
+</html>
+
+
