@@ -1,4 +1,4 @@
-/// <reference path="jquery-1.8.d.ts" />  
+/// <reference path="jquery.d.ts" />
 
 module M {
     'use strict';
@@ -168,13 +168,13 @@ module M {
         }
 
         static disableAll():void {
-            $(DISABLE_SELECTOR).each((i, e:HTMLElement) => {
+            $(Button.DISABLE_SELECTOR).each((i, e:HTMLElement) => {
                 Button.populate(e).disable();
             });
         }
 
         static enableAll():void {
-            $(DISABLE_SELECTOR).each((i, e:HTMLElement) => {
+            $(Button.DISABLE_SELECTOR).each((i, e:HTMLElement) => {
                 Button.populate(e).enable();
             });
         }

@@ -43,7 +43,7 @@
 
 <h2 class="demoHeaders">Common Input Fields</h2>
 
-<form onsubmit="return true;" action="http://blog.ik.am/category/Book/">
+<form onsubmit="return false;" action="http://blog.ik.am/category/Book/">
     <p>
         <strong>Input (type: 'text')</strong><br/>
         <input type="text"/>
@@ -70,9 +70,24 @@
         <input type="button" value="Click" data-disable-with="Testing..." class="disable-double-submit"/> <br/>
     </p>
 
+
     <a id="g" href="http://google.com">google</a>
 </form>
+
+<button class="disable-double-submit" id="newButton">new button</button>
+<div id="new"></div>
 </body>
+<script>
+    $(function () {
+        var $btn = $('#newButton');
+        var i = 0;
+        $btn.on('click', function (e) {
+            e.preventDefault();
+            $('#new').append($('<button class="disable-double-submit" data-disable-with="send...">' + (++i) + '</button>'));
+            return false;
+        });
+    });
+</script>
 </html>
 
 
