@@ -4,68 +4,10 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
+/// <reference path="jquery.d.ts" />
 var M;
 (function (M) {
     'use strict';
-
-    var LogLevel = (function () {
-        function LogLevel() {
-        }
-        LogLevel.DEBUG = 0;
-        LogLevel.INFO = 1;
-        LogLevel.WARN = 2;
-        LogLevel.ERROR = 3;
-        return LogLevel;
-    })();
-    M.LogLevel = LogLevel;
-
-    M.LOG_LEVEL = LogLevel.DEBUG;
-
-    var Logger = (function () {
-        function Logger() {
-        }
-        Logger.debug = function () {
-            var args = [];
-            for (var _i = 0; _i < (arguments.length - 0); _i++) {
-                args[_i] = arguments[_i + 0];
-            }
-            if (M.LOG_LEVEL <= LogLevel.DEBUG) {
-                console.log.apply(console, args);
-            }
-        };
-
-        Logger.info = function () {
-            var args = [];
-            for (var _i = 0; _i < (arguments.length - 0); _i++) {
-                args[_i] = arguments[_i + 0];
-            }
-            if (M.LOG_LEVEL <= LogLevel.INFO) {
-                console.info.apply(console, args);
-            }
-        };
-
-        Logger.warn = function () {
-            var args = [];
-            for (var _i = 0; _i < (arguments.length - 0); _i++) {
-                args[_i] = arguments[_i + 0];
-            }
-            if (M.LOG_LEVEL <= LogLevel.WARN) {
-                console.warn.apply(console, args);
-            }
-        };
-
-        Logger.error = function () {
-            var args = [];
-            for (var _i = 0; _i < (arguments.length - 0); _i++) {
-                args[_i] = arguments[_i + 0];
-            }
-            if (M.LOG_LEVEL <= LogLevel.ERROR) {
-                console.error.apply(console, args);
-            }
-        };
-        return Logger;
-    })();
-    M.Logger = Logger;
 
     var Button = (function () {
         function Button(element) {
@@ -94,7 +36,6 @@ var M;
                 } else {
                     button = new Button(btn);
                 }
-                M.Logger.debug("new", button);
             }
             return button;
         };
@@ -103,12 +44,14 @@ var M;
             this.isEnabled = false;
             this.$btn.attr('disabled', true);
             if (this.loadingText && this.originalText) {
+                // change txt
                 (this.$btn[this.textMethod])(this.loadingText);
             }
         };
 
         Button.prototype.enable = function () {
             if (this.loadingText && this.originalText) {
+                // change txt
                 (this.$btn[this.textMethod])(this.originalText);
             }
             this.$btn.attr('disabled', false);
@@ -121,7 +64,6 @@ var M;
 
         Button.prototype.setPreventDoubleSubmit = function (timeout) {
             if (typeof timeout === "undefined") { timeout = Button.DEFAULT_DISABLE_TIMEOUT; }
-            var _this = this;
             var buttonName = this.$btn.attr('name');
 
             if (!this.isHiddenAdded && buttonName) {
@@ -132,7 +74,6 @@ var M;
                 });
 
                 this.$btn.after(hidden);
-                M.Logger.debug('add hidden', hidden);
                 this.isHiddenAdded = true;
             }
 
@@ -140,21 +81,16 @@ var M;
                 Button.disableAll();
                 setTimeout(function () {
                     Button.enableAll();
-                    M.Logger.debug('stop  prevent double submit', _this.$btn);
                 }, timeout);
-                M.Logger.debug('start prevent double submit', _this.$btn);
             });
         };
 
         Button.prototype.setPreventDoubleClick = function (timeout) {
             if (typeof timeout === "undefined") { timeout = Button.DEFAULT_DISABLE_TIMEOUT; }
-            var _this = this;
             Button.disableAll();
             setTimeout(function () {
                 Button.enableAll();
-                M.Logger.debug('stop  prevent double click', _this.$btn);
             }, timeout);
-            M.Logger.debug('start prevent double click', this.$btn);
         };
 
         Button.prototype.preventDoubleSubmit = function (timeout) {
@@ -239,12 +175,7 @@ var M;
 })(M || (M = {}));
 
 $(function () {
-    if (typeof console === 'undefined') {
-        window.console = {};
-        console.log = console.info = console.warn = console.error = function () {
-        };
-    }
-
+    // setup
     $(document).on('click', M.Button.DISABLE_SELECTOR, function (e) {
         if (this === e.target) {
             var button = M.Button.populate(this);

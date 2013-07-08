@@ -3,41 +3,6 @@
 module M {
     'use strict';
 
-    export class LogLevel {
-        static DEBUG = 0;
-        static INFO = 1;
-        static WARN = 2;
-        static ERROR = 3;
-    }
-
-    export var LOG_LEVEL:number = LogLevel.DEBUG;
-
-    export class Logger {
-        static debug(...args:any[]):void {
-            if (LOG_LEVEL <= LogLevel.DEBUG) {
-                console.log.apply(console, args);
-            }
-        }
-
-        static info(...args:any[]):void {
-            if (LOG_LEVEL <= LogLevel.INFO) {
-                console.info.apply(console, args);
-            }
-        }
-
-        static warn(...args:any[]):void {
-            if (LOG_LEVEL <= LogLevel.WARN) {
-                console.warn.apply(console, args);
-            }
-        }
-
-        static error(...args:any[]):void {
-            if (LOG_LEVEL <= LogLevel.ERROR) {
-                console.error.apply(console, args);
-            }
-        }
-    }
-
     export class Button {
         static DISABLE_SELECTOR = '.disable-double-submit';
         static DEFAULT_DISABLE_TIMEOUT = 3000;
@@ -94,7 +59,6 @@ module M {
                 } else {
                     button = new Button(btn);
                 }
-                M.Logger.debug("new", button);
             }
             return  button;
         }
@@ -132,7 +96,6 @@ module M {
                 });
 
                 this.$btn.after(hidden);
-                M.Logger.debug('add hidden', hidden);
                 this.isHiddenAdded = true;
             }
 
@@ -140,9 +103,7 @@ module M {
                 Button.disableAll();
                 setTimeout(() => {
                     Button.enableAll();
-                    M.Logger.debug('stop  prevent double submit', this.$btn);
                 }, timeout);
-                M.Logger.debug('start prevent double submit', this.$btn);
             });
         }
 
@@ -150,9 +111,7 @@ module M {
             Button.disableAll();
             setTimeout(() => {
                 Button.enableAll();
-                M.Logger.debug('stop  prevent double click', this.$btn);
             }, timeout);
-            M.Logger.debug('start prevent double click', this.$btn);
         }
 
         preventDoubleSubmit(timeout:number = Button.DEFAULT_DISABLE_TIMEOUT):void {
@@ -229,14 +188,6 @@ module M {
 }
 
 $(function () {
-    // setup
-    if (typeof console === 'undefined') {
-        // Prevent a console.log from blowing things up if we are on a browser that doesn't support this.
-        window.console = <Console>{};
-        console.log = console.info = console.warn = console.error = function () {
-        };
-    }
-
     // setup
     $(document).on('click', M.Button.DISABLE_SELECTOR, function (e) {
         if (this === e.target) {
